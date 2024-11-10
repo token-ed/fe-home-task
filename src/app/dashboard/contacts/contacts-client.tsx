@@ -1,20 +1,62 @@
 "use client";
-import { useState } from "react";
+import { Row } from "@tanstack/react-table";
+import { useMemo, useState } from "react";
 import { DataTable } from "../components/data-table";
 import { AddContactButtonDashboard } from "../components/forms/add-contact-button-dashboard";
 import { Contact } from "../helpers/types";
-import { useContacts } from "../hooks/useContacts";
-import { columns } from "./components/columns";
+import { FormSchema, useContacts } from "../hooks/useContacts";
+import { columns as initialColumns } from "./components/columns";
+import { DataTableRowActions } from "./components/data-table-row-actions";
 import { DataTableToolbar } from "./components/data-table-tool-bar";
 import { DetailsModal } from "./components/details-modal";
+import { EditDrawer } from "./components/edit-form/edit-drawer";
 
 export default function ContactsClient() {
+  const { contacts, addContact, editContact } = useContacts();
   const [contactDetails, setContactDetails] = useState<Contact>({
     email: "",
     name: "",
     uuid: "",
   });
-  const { contacts, addContact } = useContacts();
+
+  const contactToCheck = !!contactDetails.name && !!contactDetails.email;
+
+  const [isEditOpen, setIsEditOpen] = useState(false);
+  const [isDetailsOpen, setIsDetailsOpen] = useState(false);
+
+  const openEditDrawer = () => setIsEditOpen(true);
+  const closeEditDrawer = () => setIsEditOpen(false);
+
+  const openDetailsModal = () => setIsDetailsOpen(true);
+  const closeDetailsModal = () => setIsDetailsOpen(false);
+
+  const handleEditContacts = (uuid: string, data: FormSchema) => {
+    editContact(uuid, data);
+    setContactDetails({ ...data, uuid });
+    closeEditDrawer();
+  };
+
+  const columns = useMemo(
+    () =>
+      initialColumns.map((col) => {
+        if (col.id === "actions") {
+          return {
+            ...col,
+            cell: ({ row }: { row: Row<Contact> }) => (
+              <DataTableRowActions
+                row={row}
+                onEditClick={() => {
+                  setContactDetails(row.original);
+                  openEditDrawer();
+                }}
+              />
+            ),
+          };
+        }
+        return col;
+      }),
+    [initialColumns]
+  );
 
   if (!contacts || contacts.length < 1) {
     return (
@@ -47,21 +89,27 @@ export default function ContactsClient() {
       <DataTable
         columns={columns}
         data={contacts}
-        onRowClick={(row) => setContactDetails(row.original)}
+        onRowClick={(row) => {
+          setContactDetails(row.original);
+          openDetailsModal();
+        }}
       />
       <DetailsModal
-        isOpen={!!contactDetails.name}
-        email={contactDetails.email}
-        name={contactDetails.name}
-        gender={contactDetails.gender}
-        position={contactDetails.position}
-        onOpenChange={() =>
-          setContactDetails({
-            email: "",
-            name: "",
-            uuid: "",
-          })
-        }
+        isOpen={contactToCheck && isDetailsOpen}
+        onOpenChange={() => {
+          setContactDetails({ email: "", name: "", uuid: "" });
+          closeDetailsModal();
+        }}
+        openEditDrawer={openEditDrawer}
+        {...contactDetails}
+      />
+      <EditDrawer
+        onEditContact={handleEditContacts}
+        isOpen={contactToCheck && isEditOpen}
+        onOpenChange={() => {
+          closeEditDrawer();
+        }}
+        {...contactDetails}
       />
     </>
   );

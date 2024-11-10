@@ -7,7 +7,6 @@ export const metadata: Metadata = {
 };
 
 const ContactsClient = dynamic(() => import("./contacts-client"), {
-  ssr: false,
   loading: () => <Spinner />,
 });
 
