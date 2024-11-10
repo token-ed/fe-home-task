@@ -18,11 +18,8 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { DataTablePagination } from "../contacts/components/data-table-pagination";
-import {
-  DataTableToolbar,
-  DataTableToolbarProps,
-} from "../contacts/components/data-table-tool-bar";
+import { DataTablePagination } from "./data-table-pagination";
+import { DataTableToolbar, DataTableToolbarProps } from "./data-table-tool-bar";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];

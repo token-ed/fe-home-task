@@ -1,18 +1,18 @@
 "use client";
+import EmptyStateFeed from "@/components-dashboard/forms/empty-state-feed";
 import { useToast } from "@/components/ui/use-toast";
 import { Row } from "@tanstack/react-table";
 import { useMemo, useState } from "react";
-import { DataTable } from "../components/data-table";
-import { AddContactButtonDashboard } from "../components/forms/add-contact-button-dashboard";
 import { Contact } from "../helpers/types";
 import { FormSchema, useContacts } from "../hooks/useContacts";
-import { columns as initialColumns } from "./components/columns";
-import { DataTableRowActions } from "./components/data-table-row-actions";
+import { columns as initialColumns } from "./components/data-table/columns";
+import { DataTable } from "./components/data-table/data-table";
+import { DataTableRowActions } from "./components/data-table/data-table-row-actions";
 import { DeleteModal } from "./components/delete-modal";
 import { DetailsModal } from "./components/details-modal";
-import { EditDrawer } from "./components/edit-form/edit-drawer";
+import { EditDrawer } from "./components/forms/edit-drawer";
 
-export default function ContactsClient() {
+export default function ContactsList() {
   const { toast } = useToast();
   const { contacts, addContact, editContact, deleteContact, isUnique } = useContacts();
   const [contactDetails, setContactDetails] = useState<Contact>({
@@ -81,32 +81,11 @@ export default function ContactsClient() {
   );
 
   if (!contacts || contacts.length < 1) {
-    return (
-      <>
-        <div className="">
-          <div className="max-w-screen-lg text-gray-500 dark:text-gray-400 sm:text-lg">
-            <h2 className="mb-4 text-4xl font-bold tracking-tight text-gray-900 dark:text-white">
-              Your Contact List is Empty
-            </h2>
-            <p className="mb-4 font-light">
-              It looks like you haven&apos;t added any contacts yet.
-              <br />
-              Start building your network by adding new contacts, so you can easily manage and
-              access all your important connections in one place.
-            </p>
-            <p className="mb-4 font-medium">
-              Ready to get started? Click the button below to add your first contact.
-            </p>
-          </div>
-        </div>
-
-        <AddContactButtonDashboard addContact={addContact} isUnique={isUnique} />
-      </>
-    );
+    return <EmptyStateFeed addContact={addContact} isUnique={isUnique} />;
   }
 
   return (
-    <>
+    <div>
       <DataTable
         columns={columns}
         data={contacts}
@@ -141,6 +120,6 @@ export default function ContactsClient() {
         onOpenChange={closeDeleteModal}
         {...contactDetails}
       />
-    </>
+    </div>
   );
 }
