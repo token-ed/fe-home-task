@@ -32,7 +32,7 @@ export function DataTableToolbar<TData>({
         <Button
           variant="ghost"
           onClick={() => table.resetColumnFilters()}
-          className="h-8 px-2 lg:px-3">
+          className="flex h-8 w-fit gap-x-2 border-dashed border-slate-700 bg-slate-200 py-5 text-base hover:bg-slate-300 dark:border-slate-400 dark:bg-slate-500 dark:hover:bg-slate-700">
           Reset
           <RxCross2 className="ml-2 h-4 w-4" />
         </Button>
