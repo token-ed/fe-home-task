@@ -1,14 +1,20 @@
+import { Metadata } from "next";
 import dynamic from "next/dynamic";
 import { Spinner } from "../components/spinner";
 
+export const metadata: Metadata = {
+  title: "Contacts",
+};
+
 const ContactsClient = dynamic(() => import("./contacts-client"), {
+  ssr: false,
   loading: () => <Spinner />,
 });
 
 export default async function Contacts() {
   return (
-    <div className="container mx-auto py-10">
+    <section className="container mx-auto py-10">
       <ContactsClient />
-    </div>
+    </section>
   );
 }
