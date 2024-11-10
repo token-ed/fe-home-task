@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export enum Role {
+export enum Position {
   StaffEngineer = "Staff Engineer",
   SeniorDeveloper = "Senior Developer",
   JuniorDeveloper = "Junior Developer",
@@ -11,7 +11,7 @@ export const ContactSchema = z.object({
   email: z.string().email(),
   gender: z.enum(["male", "female"]).optional(),
   name: z.string(),
-  role: z.nativeEnum(Role).optional(),
+  position: z.nativeEnum(Position).optional(),
   uuid: z.string().uuid(),
 });
 

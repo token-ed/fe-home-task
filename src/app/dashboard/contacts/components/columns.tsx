@@ -42,7 +42,7 @@ export const columns: ColumnDef<Contact>[] = [
     header: () => <DataTableColumnHeader title="Position" />,
     cell: ({ row }) => (
       <span className="text-base font-semibold text-gray-500 dark:text-slate-300">
-        {row.original.role}
+        {row.original.position || "N/A"}
       </span>
     ),
   },
