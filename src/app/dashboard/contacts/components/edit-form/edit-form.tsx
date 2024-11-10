@@ -69,7 +69,7 @@ export const EditForm = ({
   });
 
   const onSubmit = (values: FormSchema) => {
-    if (!isUnique(values.email)) {
+    if (!isUnique(values.email, uuid)) {
       toast({
         duration: 3000,
         variant: "destructive",
