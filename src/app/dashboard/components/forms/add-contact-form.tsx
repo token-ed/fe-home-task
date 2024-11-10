@@ -149,14 +149,11 @@ export const AddContactForm = ({ onClose, addContact, isUnique }: AddContactForm
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
-                  {positionOptions.map((option) => {
-                    console.log(option.value);
-                    return (
-                      <SelectItem value={option.value} key={option.value}>
-                        {option.label}
-                      </SelectItem>
-                    );
-                  })}
+                  {positionOptions.map((option) => (
+                    <SelectItem value={option.value} key={option.value}>
+                      {option.label}
+                    </SelectItem>
+                  ))}
                 </SelectContent>
               </Select>
               <FormMessage />
