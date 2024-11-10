@@ -1,4 +1,9 @@
+import { Metadata } from "next";
 import { ApplicationStatus } from "./application-status";
+
+export const metadata: Metadata = {
+  title: "Dashboard | Contactz",
+};
 
 export default function Dashboard() {
   return (

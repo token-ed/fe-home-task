@@ -6,7 +6,7 @@ import { FaCircleCheck } from "react-icons/fa6";
 
 import { IoWarningOutline } from "react-icons/io5";
 
-import { AddContactCard } from "./components/forms/add-contact-button";
+import { AddContactButtonDashboard } from "./components/forms/add-contact-button-dashboard";
 import { useContacts } from "./hooks/useContacts";
 
 const getBannerConfig = (
@@ -76,7 +76,7 @@ export const ApplicationStatus = () => {
       <MediaObject imageSrc={PeopleContacts} title={title}>
         {description}
       </MediaObject>
-      <AddContactCard addContact={addContact} />
+      <AddContactButtonDashboard addContact={addContact} />
     </>
   );
 };

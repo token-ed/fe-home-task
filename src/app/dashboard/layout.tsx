@@ -8,7 +8,6 @@ export const metadata = {
     template: "%s | Contactz",
     default: "Dashboard",
   },
-  description: "Manage your contactz!",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
