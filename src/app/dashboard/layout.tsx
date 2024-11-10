@@ -20,7 +20,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           enableSystem
           disableTransitionOnChange>
           <Navigation />
-          <main className="h-fit min-h-[100vh] flex-1 bg-gray-100 sm:ml-72 dark:bg-slate-400">
+          <main className="h-fit min-h-[100vh] flex-1 bg-gray-100 pt-24 dark:bg-slate-400 sm:ml-72">
             {children}
           </main>
         </ThemeProvider>
