@@ -1,11 +1,10 @@
 "use client";
-
-import { AddContactButtonDataTable } from "@/components-dashboard/forms/add-contact-button-data-table";
 import { AddContactFormProps } from "@/components-dashboard/forms/add-contact-form";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Table } from "@tanstack/react-table";
 import { RxCross2 } from "react-icons/rx";
+import { AddContact } from "../forms/add-contact";
 
 export interface DataTableToolbarProps<TData> {
   table: Table<TData>;
@@ -27,7 +26,7 @@ export function DataTableToolbar<TData>({
         onChange={(event) => table.getColumn("name")?.setFilterValue(event.target.value)}
         className="flex h-8 w-[150px] gap-x-2 border-dashed border-slate-700 bg-slate-200 py-5 text-base hover:bg-slate-300 dark:border-slate-400 dark:bg-slate-500 dark:hover:bg-slate-700 lg:w-[250px]"
       />
-      <AddContactButtonDataTable addContact={addContact} isUnique={isUnique} />
+      <AddContact addContact={addContact} isUnique={isUnique} />
       {isFiltered && (
         <Button
           variant="ghost"

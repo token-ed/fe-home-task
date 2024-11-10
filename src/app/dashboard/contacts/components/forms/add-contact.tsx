@@ -1,16 +1,17 @@
 "use client";
-import { IoPersonAddOutline } from "react-icons/io5";
 
+import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { useState } from "react";
-import { AddContactForm, AddContactFormProps } from "./add-contact-form";
+import { LuPlusCircle } from "react-icons/lu";
+import { AddContactForm, AddContactFormProps } from "../../../components/forms/add-contact-form";
 
 interface Props {
   addContact: AddContactFormProps["addContact"];
   isUnique: AddContactFormProps["isUnique"];
 }
 
-export const AddContactButtonDashboard = ({ addContact, isUnique }: Props) => {
+export const AddContact = ({ addContact, isUnique }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const openDrawer = () => setIsOpen(true);
@@ -20,18 +21,17 @@ export const AddContactButtonDashboard = ({ addContact, isUnique }: Props) => {
     <>
       <Sheet open={isOpen} onOpenChange={setIsOpen}>
         <SheetTrigger asChild>
-          <div
+          <Button
             onClick={openDrawer}
-            className="group mt-6 flex h-40 w-full cursor-pointer flex-col items-center justify-center gap-y-4 rounded-lg border-2 border-dashed border-gray-700 bg-sky-200/50 hover:bg-sky-300/50">
-            <IoPersonAddOutline className="h-16 w-16 text-gray-600 group-hover:text-black" />
-            <span className="text-xl font-bold text-gray-600 group-hover:text-black">
-              Add contact
-            </span>
-          </div>
+            variant="outline"
+            size="sm"
+            className="flex h-8 gap-x-2 border-dashed border-slate-700 bg-slate-200 py-5 text-base hover:bg-slate-300 dark:border-slate-400 dark:bg-slate-500 dark:hover:bg-slate-700">
+            <LuPlusCircle className="h-6 w-6" /> Add contact
+          </Button>
         </SheetTrigger>
         <SheetContent className="h-full max-h-screen w-full space-y-4 overflow-y-scroll p-0 sm:max-w-xl sm:overflow-y-auto">
           <SheetHeader onClose={closeDrawer} className="px-6 pt-4">
-            <SheetTitle>Add New Contact</SheetTitle>
+            <SheetTitle>Add contact</SheetTitle>
           </SheetHeader>
           <AddContactForm onClose={closeDrawer} addContact={addContact} isUnique={isUnique} />
         </SheetContent>
