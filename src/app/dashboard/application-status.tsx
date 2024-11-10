@@ -6,6 +6,7 @@ import { FaCircleCheck } from "react-icons/fa6";
 
 import { IoWarningOutline } from "react-icons/io5";
 
+import { AddContactCard } from "./components/forms/add-contact-button";
 import { useContacts } from "./hooks/useContacts";
 
 const getBannerConfig = (
@@ -49,7 +50,7 @@ const getBannerConfig = (
               <br /> Feel free to visit the{" "}
               <Link
                 href="/dashboard/contacts"
-                className="font-bold text-blue-300 underline hover:text-blue-900">
+                className="font-bold text-sky-700/70 underline hover:text-sky-900 dark:text-blue-300 dark:hover:text-sky-900">
                 Contacts
               </Link>{" "}
               page and start managing some of your favourite contacts!
@@ -65,14 +66,17 @@ const getBannerConfig = (
         title: "Your contact list is still empty",
       };
 
-export const BannerClient = () => {
-  const contacts = useContacts();
+export const ApplicationStatus = () => {
+  const { contacts, addContact } = useContacts();
 
   const { description, title } = getBannerConfig(contacts && contacts.length > 0);
 
   return (
-    <MediaObject imageSrc={PeopleContacts} title={title}>
-      {description}
-    </MediaObject>
+    <>
+      <MediaObject imageSrc={PeopleContacts} title={title}>
+        {description}
+      </MediaObject>
+      <AddContactCard addContact={addContact} />
+    </>
   );
 };

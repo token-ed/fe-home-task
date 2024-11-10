@@ -1,4 +1,5 @@
 import { Navigation } from "@/components-dashboard/navigation";
+import { Toaster } from "@/components/ui/toaster";
 import "@/styles/globals.css";
 import { ThemeProvider } from "next-themes";
 
@@ -23,6 +24,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <main className="h-fit min-h-[100vh] flex-1 bg-gray-100 pt-24 dark:bg-slate-400 sm:ml-72">
             {children}
           </main>
+          <Toaster />
         </ThemeProvider>
       </body>
     </html>
