@@ -5,9 +5,11 @@ import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/co
 import { useState } from "react";
 import { AddContactForm, AddContactFormProps } from "./add-contact-form";
 
-export const AddContactButtonDashboard = ({
-  addContact,
-}: Pick<AddContactFormProps, "addContact">) => {
+interface Props {
+  addContact: AddContactFormProps["addContact"];
+}
+
+export const AddContactButtonDashboard = ({ addContact }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const openDrawer = () => setIsOpen(true);

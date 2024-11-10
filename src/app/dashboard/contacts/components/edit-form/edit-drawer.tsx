@@ -5,6 +5,7 @@ import { EditForm, EditFormProps } from "./edit-form";
 interface Props extends Contact {
   isOpen: boolean;
   onEditContact: EditFormProps["onEditContact"];
+  isUnique: EditFormProps["isUnique"];
   onOpenChange: (open: boolean) => void;
 }
 
@@ -17,6 +18,7 @@ export const EditDrawer = ({
   uuid,
   gender,
   position,
+  isUnique,
 }: Props) => {
   return (
     <Sheet open={isOpen} onOpenChange={onOpenChange}>
@@ -31,6 +33,7 @@ export const EditDrawer = ({
           uuid={uuid}
           gender={gender}
           position={position}
+          isUnique={isUnique}
         />
       </SheetContent>
     </Sheet>

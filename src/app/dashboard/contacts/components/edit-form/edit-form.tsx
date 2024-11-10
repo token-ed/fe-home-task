@@ -43,9 +43,18 @@ export const positionOptions: Option[] = PositionProperties.map((property) => ({
 
 export interface EditFormProps extends Contact {
   onEditContact: (uuid: string, data: FormSchema) => void;
+  isUnique: (email: string, uuid?: string) => boolean;
 }
 
-export const EditForm = ({ onEditContact, email, name, uuid, gender, position }: EditFormProps) => {
+export const EditForm = ({
+  onEditContact,
+  email,
+  name,
+  uuid,
+  gender,
+  position,
+  isUnique,
+}: EditFormProps) => {
   const { toast } = useToast();
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -60,6 +69,15 @@ export const EditForm = ({ onEditContact, email, name, uuid, gender, position }:
   });
 
   const onSubmit = (values: FormSchema) => {
+    if (!isUnique(values.email)) {
+      toast({
+        duration: 3000,
+        variant: "destructive",
+        title: `Some user already exists with email ${values.email}`,
+        description: `Please try again with a different email`,
+      });
+      return;
+    }
     onEditContact(uuid, values);
     toast({
       duration: 3000,

@@ -15,6 +15,10 @@ export type FormSchema = z.infer<typeof formSchema>;
 export const useContacts = () => {
   const [contacts, setContacts] = useState<Contact[]>([]);
 
+  const isUnique = (email: string, uuid?: string) => {
+    return !contacts.some((contact) => contact.email === email && contact.uuid !== uuid);
+  };
+
   const addContact = (data: FormSchema) => {
     if (typeof window !== undefined) {
       const newContact = { ...data, uuid: uuidv4() };
@@ -61,5 +65,5 @@ export const useContacts = () => {
     }
   }, []);
 
-  return { contacts, addContact, editContact, deleteContact };
+  return { contacts, addContact, editContact, deleteContact, isUnique };
 };

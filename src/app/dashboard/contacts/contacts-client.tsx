@@ -15,7 +15,7 @@ import { EditDrawer } from "./components/edit-form/edit-drawer";
 
 export default function ContactsClient() {
   const { toast } = useToast();
-  const { contacts, addContact, editContact, deleteContact } = useContacts();
+  const { contacts, addContact, editContact, deleteContact, isUnique } = useContacts();
   const [contactDetails, setContactDetails] = useState<Contact>({
     email: "",
     name: "",
@@ -108,7 +108,7 @@ export default function ContactsClient() {
 
   return (
     <>
-      <DataTableToolbar addContact={addContact} />
+      <DataTableToolbar addContact={addContact} isUnique={isUnique} />
       <DataTable
         columns={columns}
         data={contacts}
@@ -131,6 +131,7 @@ export default function ContactsClient() {
         onEditContact={handleEditContacts}
         isOpen={contactToCheck && isEditOpen}
         onOpenChange={closeEditDrawer}
+        isUnique={isUnique}
         {...contactDetails}
       />
       <DeleteModal
