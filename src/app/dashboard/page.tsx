@@ -9,6 +9,7 @@ import { FaCircleCheck } from "react-icons/fa6";
 import { IoIosWarning } from "react-icons/io";
 
 import { RecentContacts } from "./components/recent-contacts";
+import { RecentContactsGraph } from "./components/recent-contacts-graph";
 import { Spinner } from "./components/spinner";
 import { useContacts } from "./hooks/useContacts";
 
@@ -91,11 +92,19 @@ export default function Dashboard() {
   const { description, title } = getBannerConfig(hasContacts);
 
   return (
-    <section className="container flex flex-col gap-y-8 p-6 sm:h-[calc(100vh-6rem)]">
+    <section className="container flex flex-col gap-y-8 p-6">
       <MediaObject imageSrc={PeopleContacts} title={title}>
         {description}
       </MediaObject>
-      {hasContacts && <RecentContacts contacts={contacts} />}
+      <div className="flex flex-col gap-6 lg:flex-row">
+        {hasContacts && (
+          <>
+            <RecentContacts contacts={contacts} />
+            <RecentContactsGraph contacts={contacts} />
+          </>
+        )}
+      </div>
+
       {!hasContacts && <EmptyStateFeed addContact={addContact} isUnique={isUnique} isDashboard />}
       <Footer />
     </section>
