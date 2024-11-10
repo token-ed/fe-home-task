@@ -37,7 +37,7 @@ export const RecentContacts = ({ contacts }: Props) => {
   );
 
   return (
-    <div className="max-w-md rounded-md border border-gray-500 p-4">
+    <div className="rounded-md border border-gray-500 p-4 md:min-w-96">
       <p className="w-full rounded bg-slate-500 p-2 text-center text-xl font-medium text-white">
         Recent contacts
       </p>
