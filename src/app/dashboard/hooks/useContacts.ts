@@ -21,7 +21,13 @@ export const useContacts = () => {
 
   const addContact = (data: FormSchema) => {
     if (typeof window !== undefined) {
-      const newContact = { ...data, uuid: uuidv4() };
+      const timestamp = new Date();
+      const newContact: Contact = {
+        ...data,
+        uuid: uuidv4(),
+        createdAt: timestamp.toString(),
+        updatedAt: timestamp.toString(),
+      };
       const updatedContacts = [...contacts, newContact];
 
       localStorage.setItem("contacts", JSON.stringify(updatedContacts));
@@ -39,6 +45,7 @@ export const useContacts = () => {
         contactsToEdit[contactToEditIndex] = {
           ...contacts[contactToEditIndex],
           ...data,
+          updatedAt: new Date().toString(),
         };
 
         localStorage.setItem("contacts", JSON.stringify(contactsToEdit));

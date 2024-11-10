@@ -13,7 +13,7 @@ const ContactsList = dynamic(() => import("./contacts-list"), {
 
 export default async function Contacts() {
   return (
-    <section className="container flex flex-col justify-between gap-y-8 p-6 sm:h-[calc(100vh-6rem)]">
+    <section className="container flex flex-col justify-between gap-y-8 p-6">
       <ContactsList />
       <Footer />
     </section>

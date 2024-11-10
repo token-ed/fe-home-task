@@ -13,6 +13,8 @@ export const ContactSchema = z.object({
   name: z.string(),
   position: z.nativeEnum(Position).optional(),
   uuid: z.string().uuid(),
+  createdAt: z.string().datetime().optional(),
+  updatedAt: z.string().datetime().optional(),
 });
 
 export type Contact = z.infer<typeof ContactSchema>;

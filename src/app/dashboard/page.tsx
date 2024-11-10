@@ -8,6 +8,7 @@ import Link from "next/link";
 import { FaCircleCheck } from "react-icons/fa6";
 import { IoIosWarning } from "react-icons/io";
 
+import { RecentContacts } from "./components/recent-contacts";
 import { Spinner } from "./components/spinner";
 import { useContacts } from "./hooks/useContacts";
 
@@ -94,6 +95,7 @@ export default function Dashboard() {
       <MediaObject imageSrc={PeopleContacts} title={title}>
         {description}
       </MediaObject>
+      {hasContacts && <RecentContacts contacts={contacts} />}
       {!hasContacts && <EmptyStateFeed addContact={addContact} isUnique={isUnique} isDashboard />}
       <Footer />
     </section>
