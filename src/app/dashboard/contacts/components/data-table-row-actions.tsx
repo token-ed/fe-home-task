@@ -4,7 +4,7 @@ import { GoPencil } from "react-icons/go";
 import { IoTrashBinOutline } from "react-icons/io5";
 
 import { Button } from "@/components/ui/button";
-import { ContactSchema } from "../../components/helper";
+import { ContactSchema } from "../../helpers/types";
 
 interface DataTableRowActionsProps<TData> {
   row: Row<TData>;

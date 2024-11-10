@@ -8,7 +8,6 @@ export enum Role {
 }
 
 export const ContactSchema = z.object({
-  avatar: z.string().optional(),
   email: z.string().email(),
   gender: z.enum(["male", "female"]).optional(),
   name: z.string(),
