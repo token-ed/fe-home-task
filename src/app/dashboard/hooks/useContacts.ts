@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { z } from "zod";
-import { Contact, Role } from "../helpers/types";
+import { Contact, Position } from "../helpers/types";
 const formSchema = z.object({
   name: z.string().min(2).max(30),
   email: z.string().email(),
-  gender: z.enum(["male", "female"]),
-  role: z.nativeEnum(Role).optional(),
+  gender: z.enum(["male", "female"]).optional(),
+  role: z.nativeEnum(Position).optional(),
 });
 
 type FormSchema = z.infer<typeof formSchema>;

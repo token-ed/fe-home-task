@@ -11,20 +11,43 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { useToast } from "@/components/ui/use-toast";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { ReactNode } from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
-import { Role } from "../../helpers/types";
+import { Position } from "../../helpers/types";
 
 const formSchema = z.object({
   name: z.string().min(2).max(30),
   email: z.string().email(),
-  gender: z.enum(["male", "female"]),
-  position: z.nativeEnum(Role).optional(),
+  gender: z.enum(["male", "female"]).optional(),
+  position: z.nativeEnum(Position).optional(),
 });
 
 type FormSchema = z.infer<typeof formSchema>;
+
+interface Option {
+  value: string;
+  label: ReactNode;
+}
+
+const newObj = { ...Position };
+const PositionProperties = Object.getOwnPropertyNames(
+  newObj
+) as unknown as (keyof typeof Position)[];
+
+export const positionOptions: Option[] = PositionProperties.map((property) => ({
+  value: Position[property],
+  label: Position[property],
+}));
 
 export interface AddContactFormProps {
   onClose: () => void;
@@ -84,6 +107,55 @@ export const AddContactForm = ({ onClose, addContact }: AddContactFormProps) => 
               <FormControl>
                 <Input {...field} />
               </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="gender"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Gender (optional)</FormLabel>
+              <Select onValueChange={field.onChange} defaultValue={field.value}>
+                <FormControl>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select your gender" />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                  <SelectItem value="male">Male</SelectItem>
+                  <SelectItem value="female">Female</SelectItem>
+                </SelectContent>
+              </Select>
+              <FormDescription>Male is the default if not selected</FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="position"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Position (optional)</FormLabel>
+              <Select onValueChange={field.onChange} defaultValue={field.value}>
+                <FormControl>
+                  <SelectTrigger>
+                    <SelectValue placeholder="What is your position in the company?" />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                  {positionOptions.map((option) => {
+                    console.log(option.value);
+                    return (
+                      <SelectItem value={option.value} key={option.value}>
+                        {option.label}
+                      </SelectItem>
+                    );
+                  })}
+                </SelectContent>
+              </Select>
               <FormMessage />
             </FormItem>
           )}
