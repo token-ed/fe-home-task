@@ -8,7 +8,6 @@ import { Contact } from "../helpers/types";
 import { FormSchema, useContacts } from "../hooks/useContacts";
 import { columns as initialColumns } from "./components/columns";
 import { DataTableRowActions } from "./components/data-table-row-actions";
-import { DataTableToolbar } from "./components/data-table-tool-bar";
 import { DeleteModal } from "./components/delete-modal";
 import { DetailsModal } from "./components/details-modal";
 import { EditDrawer } from "./components/edit-form/edit-drawer";
@@ -108,7 +107,6 @@ export default function ContactsClient() {
 
   return (
     <>
-      <DataTableToolbar addContact={addContact} isUnique={isUnique} />
       <DataTable
         columns={columns}
         data={contacts}
@@ -116,6 +114,8 @@ export default function ContactsClient() {
           setContactDetails(row.original);
           openDetailsModal();
         }}
+        addContact={addContact}
+        isUnique={isUnique}
       />
       <DetailsModal
         isOpen={contactToCheck && isDetailsOpen}
