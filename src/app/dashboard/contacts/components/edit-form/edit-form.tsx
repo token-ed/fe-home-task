@@ -64,8 +64,8 @@ export const EditForm = ({ onEditContact, email, name, uuid, gender, position }:
     toast({
       duration: 3000,
       variant: "success",
-      title: "Contact successfuly edited!",
-      description: `${values.name} edited`,
+      title: "Contact edited",
+      description: `You successfully edited ${values.name}`,
     });
   };
 
