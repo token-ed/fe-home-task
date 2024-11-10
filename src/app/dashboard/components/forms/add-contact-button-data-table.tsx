@@ -6,9 +6,12 @@ import { useState } from "react";
 import { LuPlusCircle } from "react-icons/lu";
 import { AddContactForm, AddContactFormProps } from "./add-contact-form";
 
-export const AddContactButtonDataTable = ({
-  addContact,
-}: Pick<AddContactFormProps, "addContact">) => {
+interface Props {
+  addContact: AddContactFormProps["addContact"];
+  isUnique: AddContactFormProps["isUnique"];
+}
+
+export const AddContactButtonDataTable = ({ addContact, isUnique }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const openDrawer = () => setIsOpen(true);
@@ -30,7 +33,7 @@ export const AddContactButtonDataTable = ({
           <SheetHeader onClose={closeDrawer} className="px-6 pt-4">
             <SheetTitle>Add contact</SheetTitle>
           </SheetHeader>
-          <AddContactForm onClose={closeDrawer} addContact={addContact} />
+          <AddContactForm onClose={closeDrawer} addContact={addContact} isUnique={isUnique} />
         </SheetContent>
       </Sheet>
     </>

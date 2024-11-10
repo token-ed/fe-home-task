@@ -44,9 +44,10 @@ export const positionOptions: Option[] = PositionProperties.map((property) => ({
 export interface AddContactFormProps {
   onClose: () => void;
   addContact: (data: FormSchema) => void;
+  isUnique?: (email: string, uuid?: string) => boolean;
 }
 
-export const AddContactForm = ({ onClose, addContact }: AddContactFormProps) => {
+export const AddContactForm = ({ onClose, addContact, isUnique }: AddContactFormProps) => {
   const { toast } = useToast();
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -61,6 +62,16 @@ export const AddContactForm = ({ onClose, addContact }: AddContactFormProps) => 
   });
 
   const onSubmit = (values: FormSchema) => {
+    if (!isUnique?.(values.email)) {
+      toast({
+        duration: 3000,
+        variant: "destructive",
+        title: `Some user already exists with email ${values.email}`,
+        description: `Please try again with a different email`,
+      });
+      return;
+    }
+
     addContact(values);
     onClose();
     toast({
