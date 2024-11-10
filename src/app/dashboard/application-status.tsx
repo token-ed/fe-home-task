@@ -67,7 +67,7 @@ const getBannerConfig = (
       };
 
 export const ApplicationStatus = () => {
-  const { contacts, addContact } = useContacts();
+  const { contacts, addContact, isUnique } = useContacts();
 
   const { description, title } = getBannerConfig(contacts && contacts.length > 0);
 
@@ -76,7 +76,7 @@ export const ApplicationStatus = () => {
       <MediaObject imageSrc={PeopleContacts} title={title}>
         {description}
       </MediaObject>
-      <AddContactButtonDashboard addContact={addContact} />
+      <AddContactButtonDashboard addContact={addContact} isUnique={isUnique} />
     </>
   );
 };

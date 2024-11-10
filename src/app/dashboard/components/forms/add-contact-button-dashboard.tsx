@@ -7,9 +7,10 @@ import { AddContactForm, AddContactFormProps } from "./add-contact-form";
 
 interface Props {
   addContact: AddContactFormProps["addContact"];
+  isUnique: AddContactFormProps["isUnique"];
 }
 
-export const AddContactButtonDashboard = ({ addContact }: Props) => {
+export const AddContactButtonDashboard = ({ addContact, isUnique }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const openDrawer = () => setIsOpen(true);
@@ -32,7 +33,7 @@ export const AddContactButtonDashboard = ({ addContact }: Props) => {
           <SheetHeader onClose={closeDrawer} className="px-6 pt-4">
             <SheetTitle>Add New Contact</SheetTitle>
           </SheetHeader>
-          <AddContactForm onClose={closeDrawer} addContact={addContact} />
+          <AddContactForm onClose={closeDrawer} addContact={addContact} isUnique={isUnique} />
         </SheetContent>
       </Sheet>
     </>

@@ -100,7 +100,7 @@ export default function ContactsClient() {
           </div>
         </div>
 
-        <AddContactButtonDashboard addContact={addContact} />
+        <AddContactButtonDashboard addContact={addContact} isUnique={isUnique} />
       </>
     );
   }
