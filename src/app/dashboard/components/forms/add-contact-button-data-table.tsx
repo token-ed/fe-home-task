@@ -22,7 +22,7 @@ export const AddContactButtonDataTable = ({
             onClick={openDrawer}
             variant="outline"
             size="sm"
-            className="flex h-8 gap-x-2 border-dashed border-slate-700 bg-slate-200 py-5 text-base hover:bg-slate-300 dark:border-slate-200 dark:bg-slate-700 dark:hover:bg-slate-500">
+            className="flex h-8 gap-x-2 border-dashed border-slate-700 bg-slate-200 py-5 text-base hover:bg-slate-300 dark:border-slate-400 dark:bg-slate-500 dark:hover:bg-slate-700"
             <LuPlusCircle className="h-6 w-6" /> Add contact
           </Button>
         </SheetTrigger>

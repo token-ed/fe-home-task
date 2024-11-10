@@ -1,11 +1,19 @@
 "use client";
+import { useState } from "react";
 import { DataTable } from "../components/data-table";
 import { AddContactButtonDashboard } from "../components/forms/add-contact-button-dashboard";
+import { Contact } from "../helpers/types";
 import { useContacts } from "../hooks/useContacts";
 import { columns } from "./components/columns";
 import { DataTableToolbar } from "./components/data-table-tool-bar";
+import { DetailsModal } from "./components/details-modal";
 
 export default function ContactsClient() {
+  const [contactDetails, setContactDetails] = useState<Contact>({
+    email: "",
+    name: "",
+    uuid: "",
+  });
   const { contacts, addContact } = useContacts();
 
   if (!contacts || contacts.length < 1) {
@@ -36,7 +44,25 @@ export default function ContactsClient() {
   return (
     <>
       <DataTableToolbar addContact={addContact} />
-      <DataTable columns={columns} data={contacts} />
+      <DataTable
+        columns={columns}
+        data={contacts}
+        onRowClick={(row) => setContactDetails(row.original)}
+      />
+      <DetailsModal
+        isOpen={!!contactDetails.name}
+        email={contactDetails.email}
+        name={contactDetails.name}
+        gender={contactDetails.gender}
+        position={contactDetails.position}
+        onOpenChange={() =>
+          setContactDetails({
+            email: "",
+            name: "",
+            uuid: "",
+          })
+        }
+      />
     </>
   );
 }
