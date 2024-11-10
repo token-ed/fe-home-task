@@ -1,8 +1,6 @@
-import Logo from "@/assets/images/logo.svg";
+import { LogoTitle } from "@/components/logo-title";
 import { ModeToggle } from "@/components/mode-toggle";
 import { Button } from "@/components/ui/button";
-import Image from "next/image";
-import Link from "next/link";
 import { Dispatch, SetStateAction } from "react";
 import { RxHamburgerMenu } from "react-icons/rx";
 
@@ -25,14 +23,7 @@ export const TopBar = ({ onExpand, isExpanded }: Props) => {
             onClick={() => onExpand(!isExpanded)}>
             <RxHamburgerMenu size={25} className="text-black dark:text-white" />
           </Button>
-          <h1 className="text-4xl font-extrabold text-gray-900 dark:text-white sm:text-5xl">
-            <Link
-              href="/dashboard"
-              className="flex items-center gap-x-2 bg-gradient-to-r from-sky-400 to-emerald-600 bg-clip-text text-transparent">
-              Contactz
-              <Image src={Logo} alt="logo" width={50} className="skew-x-6" />
-            </Link>
-          </h1>
+          <LogoTitle />
         </div>
         <ModeToggle />
       </div>

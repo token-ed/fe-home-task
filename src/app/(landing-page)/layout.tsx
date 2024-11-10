@@ -1,30 +1,34 @@
-import { Navigation } from "@/components-dashboard/navigation";
-import { Toaster } from "@/components/ui/toaster";
 import "@/styles/globals.css";
+import type { Metadata } from "next";
 import { ThemeProvider } from "next-themes";
+import { Inter } from "next/font/google";
 import NextTopLoader from "nextjs-toploader";
-export const metadata = {
+
+const inter = Inter({ subsets: ["latin"] });
+
+export const metadata: Metadata = {
   title: {
     template: "%s | Contactz",
     default: "Contactz",
   },
+  description: "Manage your contactz!",
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
   return (
     <html lang="en">
-      <body className="max-w-full">
+      <body className={inter.className}>
         <NextTopLoader height={5} color="#3965b8" showSpinner={false} />
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
           enableSystem
           disableTransitionOnChange>
-          <Navigation />
-          <main className="h-fit min-h-[100vh] flex-1 bg-gray-100 pt-24 dark:bg-slate-400 sm:ml-72">
-            {children}
-          </main>
-          <Toaster />
+          {children}
         </ThemeProvider>
       </body>
     </html>
