@@ -16,6 +16,7 @@ import { Contact } from "../../helpers/types";
 interface Props extends Omit<Contact, "uuid"> {
   isOpen: boolean;
   openEditDrawer: () => void;
+  openDeleteModal: () => void;
   onOpenChange: (open: boolean) => void;
 }
 
@@ -27,6 +28,7 @@ export const DetailsModal = ({
   isOpen,
   onOpenChange,
   openEditDrawer,
+  openDeleteModal,
 }: Props) => {
   return (
     <>
@@ -57,8 +59,13 @@ export const DetailsModal = ({
               <FaRegPaperPlane />
             </DialogDescription>
           </DialogHeader>
-          <DialogFooter className="flex items-center gap-x-2 sm:justify-center">
+          <DialogFooter className="flex flex-col gap-x-2 gap-y-2 sm:flex-row sm:justify-center">
             <Button onClick={openEditDrawer}>Edit contact</Button>
+            <Button
+              onClick={openDeleteModal}
+              className="bg-red-700/70 hover:bg-red-700/90 dark:bg-red-400/70 dark:hover:bg-red-500/70">
+              Delete contact
+            </Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>

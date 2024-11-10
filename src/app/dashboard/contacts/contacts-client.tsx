@@ -1,4 +1,5 @@
 "use client";
+import { useToast } from "@/components/ui/use-toast";
 import { Row } from "@tanstack/react-table";
 import { useMemo, useState } from "react";
 import { DataTable } from "../components/data-table";
@@ -8,32 +9,50 @@ import { FormSchema, useContacts } from "../hooks/useContacts";
 import { columns as initialColumns } from "./components/columns";
 import { DataTableRowActions } from "./components/data-table-row-actions";
 import { DataTableToolbar } from "./components/data-table-tool-bar";
+import { DeleteModal } from "./components/delete-modal";
 import { DetailsModal } from "./components/details-modal";
 import { EditDrawer } from "./components/edit-form/edit-drawer";
 
 export default function ContactsClient() {
-  const { contacts, addContact, editContact } = useContacts();
+  const { toast } = useToast();
+  const { contacts, addContact, editContact, deleteContact } = useContacts();
   const [contactDetails, setContactDetails] = useState<Contact>({
     email: "",
     name: "",
     uuid: "",
   });
 
+  const resetContactDetails = () => setContactDetails({ email: "", name: "", uuid: "" });
   const contactToCheck = !!contactDetails.name && !!contactDetails.email;
 
   const [isEditOpen, setIsEditOpen] = useState(false);
-  const [isDetailsOpen, setIsDetailsOpen] = useState(false);
-
   const openEditDrawer = () => setIsEditOpen(true);
   const closeEditDrawer = () => setIsEditOpen(false);
 
+  const [isDetailsOpen, setIsDetailsOpen] = useState(false);
   const openDetailsModal = () => setIsDetailsOpen(true);
   const closeDetailsModal = () => setIsDetailsOpen(false);
+
+  const [isDeleteOpen, setIsDeleteOpen] = useState(false);
+  const openDeleteModal = () => setIsDeleteOpen(true);
+  const closeDeleteModal = () => setIsDeleteOpen(false);
 
   const handleEditContacts = (uuid: string, data: FormSchema) => {
     editContact(uuid, data);
     setContactDetails({ ...data, uuid });
     closeEditDrawer();
+  };
+
+  const handleDeleteContact = () => {
+    deleteContact(contactDetails.uuid);
+    closeDeleteModal();
+    toast({
+      duration: 3000,
+      variant: "success",
+      title: "Contact deleted",
+      description: `You successfully deleted ${contactDetails.name}`,
+    });
+    resetContactDetails();
   };
 
   const columns = useMemo(
@@ -48,6 +67,10 @@ export default function ContactsClient() {
                 onEditClick={() => {
                   setContactDetails(row.original);
                   openEditDrawer();
+                }}
+                onDeleteClick={() => {
+                  setContactDetails(row.original);
+                  openDeleteModal();
                 }}
               />
             ),
@@ -97,18 +120,24 @@ export default function ContactsClient() {
       <DetailsModal
         isOpen={contactToCheck && isDetailsOpen}
         onOpenChange={() => {
-          setContactDetails({ email: "", name: "", uuid: "" });
+          resetContactDetails();
           closeDetailsModal();
         }}
+        openDeleteModal={openDeleteModal}
         openEditDrawer={openEditDrawer}
         {...contactDetails}
       />
       <EditDrawer
         onEditContact={handleEditContacts}
         isOpen={contactToCheck && isEditOpen}
-        onOpenChange={() => {
-          closeEditDrawer();
-        }}
+        onOpenChange={closeEditDrawer}
+        {...contactDetails}
+      />
+      <DeleteModal
+        isOpen={contactToCheck && isDeleteOpen}
+        onCancel={closeDeleteModal}
+        onDelete={handleDeleteContact}
+        onOpenChange={closeDeleteModal}
         {...contactDetails}
       />
     </>

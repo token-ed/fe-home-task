@@ -44,6 +44,14 @@ export const useContacts = () => {
     }
   };
 
+  const deleteContact = (uuid: string) => {
+    if (typeof window !== undefined) {
+      const updatedContacts = contacts.filter((contact) => contact.uuid !== uuid);
+      localStorage.setItem("contacts", JSON.stringify(updatedContacts));
+      setContacts(updatedContacts);
+    }
+  };
+
   useEffect(() => {
     if (typeof window !== "undefined") {
       const contactsJSON = localStorage.getItem("contacts");
@@ -53,5 +61,5 @@ export const useContacts = () => {
     }
   }, []);
 
-  return { contacts, addContact, editContact };
+  return { contacts, addContact, editContact, deleteContact };
 };
