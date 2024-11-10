@@ -1,16 +1,14 @@
-import { DataTable } from "../components/data-table";
-import { columns } from "./components/columns";
-import { Contact } from "./components/helper";
+import dynamic from "next/dynamic";
+import { Spinner } from "../components/spinner";
 
-async function getData(): Promise<Contact[]> {
-  return [];
-}
+const ContactsClient = dynamic(() => import("./contacts-client"), {
+  loading: () => <Spinner />,
+});
 
 export default async function Contacts() {
-  const data = await getData();
   return (
     <div className="container mx-auto py-10">
-      <DataTable columns={columns} data={data} />
+      <ContactsClient />
     </div>
   );
 }

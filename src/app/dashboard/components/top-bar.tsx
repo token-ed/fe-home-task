@@ -25,7 +25,7 @@ export const TopBar = ({ onExpand, isExpanded }: Props) => {
             onClick={() => onExpand(!isExpanded)}>
             <RxHamburgerMenu size={25} className="text-black dark:text-white" />
           </Button>
-          <h1 className="text-4xl font-extrabold text-gray-900 sm:text-5xl dark:text-white">
+          <h1 className="text-4xl font-extrabold text-gray-900 dark:text-white sm:text-5xl">
             <Link
               href="/dashboard"
               className="flex items-center gap-x-2 bg-gradient-to-r from-sky-400 to-emerald-600 bg-clip-text text-transparent">
