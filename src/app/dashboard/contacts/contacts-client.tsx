@@ -77,7 +77,7 @@ export default function ContactsClient() {
         }
         return col;
       }),
-    [initialColumns]
+    []
   );
 
   if (!contacts || contacts.length < 1) {
@@ -89,7 +89,7 @@ export default function ContactsClient() {
               Your Contact List is Empty
             </h2>
             <p className="mb-4 font-light">
-              It looks like you haven't added any contacts yet.
+              It looks like you haven&apos;t added any contacts yet.
               <br />
               Start building your network by adding new contacts, so you can easily manage and
               access all your important connections in one place.

@@ -17,8 +17,8 @@ const getBannerConfig = (
         description: (
           <div className="flex flex-col space-y-4">
             <div className="text-base">
-              While we are doing our best to keep your contacts safe and updated it's good to review
-              your contact list once in a while. <br />
+              While we are doing our best to keep your contacts safe and updated it&apos;s good to
+              review your contact list once in a while. <br />
               Visit the{" "}
               <Link
                 href="/dashboard/contacts"
@@ -45,8 +45,8 @@ const getBannerConfig = (
         description: (
           <div className="flex flex-col space-y-4">
             <div className="text-base">
-              You haven't added anyone to your contact list yet so you won't be able to see any
-              contacts.
+              You haven&apos;t added anyone to your contact list yet so you won&apos;t be able to
+              see any contacts.
               <br /> Feel free to visit the{" "}
               <Link
                 href="/dashboard/contacts"
