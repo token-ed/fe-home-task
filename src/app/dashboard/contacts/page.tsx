@@ -2,7 +2,6 @@ import dynamic from "next/dynamic";
 import { Spinner } from "../components/spinner";
 
 const ContactsClient = dynamic(() => import("./contacts-client"), {
-  ssr: false,
   loading: () => <Spinner />,
 });
 

@@ -1,11 +1,4 @@
-import dynamic from "next/dynamic";
 import { BannerClient } from "./banner-client";
-import { Spinner } from "./components/spinner";
-
-const ContactsClient = dynamic(() => import("./contacts/contacts-client"), {
-  ssr: false,
-  loading: () => <Spinner />,
-});
 
 export default function Dashboard() {
   return (
