@@ -23,8 +23,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { ReactNode } from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
-import { Position } from "../../helpers/types";
-import { FormSchema, formSchema } from "../../hooks/useContacts";
+import { Contact, Position } from "../../../helpers/types";
+import { FormSchema, formSchema } from "../../../hooks/useContacts";
 
 interface Option {
   value: string;
@@ -41,33 +41,31 @@ export const positionOptions: Option[] = PositionProperties.map((property) => ({
   label: Position[property],
 }));
 
-export interface AddContactFormProps {
-  onClose: () => void;
-  addContact: (data: FormSchema) => void;
+export interface EditFormProps extends Contact {
+  onEditContact: (uuid: string, data: FormSchema) => void;
 }
 
-export const AddContactForm = ({ onClose, addContact }: AddContactFormProps) => {
+export const EditForm = ({ onEditContact, email, name, uuid, gender, position }: EditFormProps) => {
   const { toast } = useToast();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     mode: "onSubmit",
     defaultValues: {
-      email: "",
-      gender: "male",
-      name: "",
-      position: undefined,
+      email,
+      gender,
+      name,
+      position,
     },
   });
 
   const onSubmit = (values: FormSchema) => {
-    addContact(values);
-    onClose();
+    onEditContact(uuid, values);
     toast({
       duration: 3000,
       variant: "success",
-      title: "Contact successfully added!",
-      description: `${values.name} is now part of your contact list`,
+      title: "Contact successfuly edited!",
+      description: `${values.name} edited`,
     });
   };
 
@@ -81,11 +79,8 @@ export const AddContactForm = ({ onClose, addContact }: AddContactFormProps) => 
             <FormItem>
               <FormLabel>Name</FormLabel>
               <FormControl>
-                <Input placeholder="Contact name" {...field} />
+                <Input {...field} />
               </FormControl>
-              <FormDescription>
-                This is the contact public display name (first name works best)
-              </FormDescription>
               <FormMessage />
             </FormItem>
           )}
