@@ -84,19 +84,19 @@ export const AddContactForm = ({ onClose, addContact, isUnique }: AddContactForm
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 px-6">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 px-6">
         <FormField
           control={form.control}
           name="name"
           render={({ field }) => (
-            <FormItem>
-              <FormLabel>Name</FormLabel>
+            <FormItem className="flex w-full flex-col space-y-1">
+              <FormLabel className="text-lg hover:cursor-pointer">Name</FormLabel>
               <FormControl>
-                <Input placeholder="Contact name" {...field} />
+                <Input
+                  {...field}
+                  className="h-12 rounded-md border-2 border-gray-200 px-4 py-2 text-base font-semibold text-gray-500 ring-gray-200 focus-visible:rounded-md focus-visible:outline-blue-500"
+                />
               </FormControl>
-              <FormDescription>
-                This is the contact public display name (first name works best)
-              </FormDescription>
               <FormMessage />
             </FormItem>
           )}
@@ -105,10 +105,13 @@ export const AddContactForm = ({ onClose, addContact, isUnique }: AddContactForm
           control={form.control}
           name="email"
           render={({ field }) => (
-            <FormItem>
-              <FormLabel>E-mail</FormLabel>
+            <FormItem className="flex w-full flex-col space-y-1">
+              <FormLabel className="text-lg hover:cursor-pointer">E-mail</FormLabel>
               <FormControl>
-                <Input {...field} />
+                <Input
+                  {...field}
+                  className="h-12 rounded-md border-2 border-gray-200 px-4 py-2 text-base font-semibold text-gray-500 ring-gray-200 focus-visible:rounded-md focus-visible:outline-blue-500"
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -118,17 +121,21 @@ export const AddContactForm = ({ onClose, addContact, isUnique }: AddContactForm
           control={form.control}
           name="gender"
           render={({ field }) => (
-            <FormItem>
-              <FormLabel>Gender (optional)</FormLabel>
+            <FormItem className="flex w-full flex-col space-y-1">
+              <FormLabel className="text-lg hover:cursor-pointer">Gender (optional)</FormLabel>
               <Select onValueChange={field.onChange} defaultValue={field.value}>
-                <FormControl>
+                <FormControl className="h-12 rounded-md border-2 border-gray-200 px-4 py-2 text-base font-semibold text-gray-500 ring-gray-200 focus:shadow-none focus:ring-0 focus-visible:border-blue-500 focus-visible:outline-none">
                   <SelectTrigger>
                     <SelectValue placeholder="Select your gender" />
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
-                  <SelectItem value="male">Male</SelectItem>
-                  <SelectItem value="female">Female</SelectItem>
+                  <SelectItem className="text-base font-semibold text-gray-500" value="male">
+                    Male
+                  </SelectItem>
+                  <SelectItem className="text-base font-semibold text-gray-500" value="female">
+                    Female
+                  </SelectItem>
                 </SelectContent>
               </Select>
               <FormDescription>Male is the default if not selected</FormDescription>
@@ -140,17 +147,20 @@ export const AddContactForm = ({ onClose, addContact, isUnique }: AddContactForm
           control={form.control}
           name="position"
           render={({ field }) => (
-            <FormItem>
-              <FormLabel>Position (optional)</FormLabel>
+            <FormItem className="flex w-full flex-col space-y-1">
+              <FormLabel className="text-lg hover:cursor-pointer">Position (optional)</FormLabel>
               <Select onValueChange={field.onChange} defaultValue={field.value}>
-                <FormControl>
+                <FormControl className="h-12 rounded-md border-2 border-gray-200 px-4 py-2 text-base font-semibold text-gray-500 ring-gray-200 focus:shadow-none focus:ring-0 focus-visible:border-blue-500 focus-visible:outline-none">
                   <SelectTrigger>
                     <SelectValue placeholder="What is your position in the company?" />
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
                   {positionOptions.map((option) => (
-                    <SelectItem value={option.value} key={option.value}>
+                    <SelectItem
+                      className="text-base font-semibold text-gray-500"
+                      value={option.value}
+                      key={option.value}>
                       {option.label}
                     </SelectItem>
                   ))}
@@ -160,7 +170,11 @@ export const AddContactForm = ({ onClose, addContact, isUnique }: AddContactForm
             </FormItem>
           )}
         />
-        <Button type="submit">Submit</Button>
+        <Button
+          className="hover:bg-navy-blue-300 bg-blue-200 font-bold uppercase text-gray-600 hover:text-white"
+          type="submit">
+          Submit
+        </Button>
       </form>
     </Form>
   );
